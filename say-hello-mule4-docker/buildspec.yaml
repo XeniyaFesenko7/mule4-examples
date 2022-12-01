@@ -41,12 +41,7 @@ phases:
       - ls -ltr 
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-#       - apt-get install jq -y
-#       - ContainerName="muleapp"
-#       - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
-#       - printf '[{"name":"muleapp","imageUri":"IMAGE_URI"}]' > imagedefinitions.json
-#       - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
-#       - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
+
 
   post_build:
     commands:
@@ -59,8 +54,8 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
 #       - printf '[{"name":"muleapp","imageUri":"IMAGE_URI"}]'$REPOSITORY_URI:$IEMAG_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json 
-      - printf '[{"name":"$CONTAINER_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json
-#      - printf '[{"name":"CONTAINER_NAME","imageUri":"image_URI"}]' > imagedefinitions.json
+#      - printf '[{"name":"$CONTAINER_NAME","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json
 
       - cat $CODEBUILD_SRC_DIR/imagedefinitions.json
       
