@@ -57,8 +57,8 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-#       - printf '[{"name":"muleapp","imageUri":"IMAGE_URI"}]'$REPOSITORY_URI:$IEMAG_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json 
-#      - printf '[{"name":"'$CONTAINER_NAME'","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json
+     #- printf '[{"name":"muleapp","imageUri":"IMAGE_URI"}]'$REPOSITORY_URI:$IEMAG_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json 
+     #- printf '[{"name":"'$CONTAINER_NAME'","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json
        - printf '[{"name":"%s","imageUri":"%s"}]' $SERVICE_NAME $REPOSITORY_URI:$IMAGE_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json
       - cat $CODEBUILD_SRC_DIR/imagedefinitions.json
       
